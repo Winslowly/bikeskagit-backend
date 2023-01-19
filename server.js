@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Routes = require('.models/routes.js');
 const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 
 app.listen(3000, ()=>{

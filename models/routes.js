@@ -1,6 +1,6 @@
 const { application } = require('express');
 const mongoose = require('mongoose');
-const Routes = require('./models/todos.js');
+const Routes = require('./models/routes.js');
 
 
 
