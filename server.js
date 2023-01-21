@@ -1,52 +1,33 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const Routes = require('.models/routes.js');
-const cors = require('cors');
+require('dotenv').config()
 
-app.use(cors());
-app.use(express.json());
+const express = require('express')
+const mongoose = require('mongoose')
+const rideRoutes = require('./routes/rides')
 
-app.listen(3000, ()=>{
-    console.log('listening...');
-});
+// Express app
+const app = express()
 
-// Create Create Route
+// Middleware
+app.use(express.json())
 
-app.post('/route', (req,res) =>{
-    Route.create(req.body, (err, createdRoute)=>{
-        res.json(createdRoute);
-    });
-});
+app.use((req,res,next) => {
+    console.log(req.path, req.method)
+    next()
+})
 
-// Index Route
+// // Routes
+app.use('/api/rides', rideRoutes)
 
-app.get('/route', (req, res)=>{
-    Route.find({}, (err, foundRoute)=>{
-        res.json(foundRoute);
-    });
-});
+// Connect to DB
+mongoose.connect(process.env.MONGO_URI)
+    .then(()=>{
+// listen for requests
+app.listen(process.env.PORT, ()=>{
+    console.log('connected to db listening...on port 4000', process.env.PORT)
+})
+})
+    .catch((error) => {
+        console.log(error)
+    })
 
-// Delete Route
- 
-app.delete('/routes/:id', (req, res)=>{
-    Route.findByIdAndRemove(req.params.id, (err, deletedRoute)=>{
-        res.json(deletedRoute);
-    });
-});
-
-// Update Route
-
-app.put('/route/:id', (req, res)=>{
-    Route.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedRoute)=>{
-        res.json(updatedRoute);
-    });
-});
-
-
-app.use(cors());
-mongoose.connect('mongodb://localhost:27017/merncrud')
-mongoose.connection.once('open', ()=>{
-    console.log('connected to mongod...');
-});
 

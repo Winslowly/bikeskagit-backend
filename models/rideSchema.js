@@ -1,13 +1,11 @@
-const { application } = require('express');
-const mongoose = require('mongoose');
-const Routes = require('./models/routes.js');
+const mongoose = require('mongoose')
 
 
-
+const Schema = mongoose.Schema
 
 // Bike Route Model
 
-const activitySchema = new mongoose.Schema({
+const activitySchema = new Schema({
     date: {
         type: String,
         require: true
@@ -21,11 +19,11 @@ const activitySchema = new mongoose.Schema({
         require: true
     },
     mileage:{
-        type: Number,
+        type: String,
         require: true
     },
     elevation:{
-        type: Number,
+        type: String,
         require: true
     },
     notes:{
@@ -36,9 +34,7 @@ const activitySchema = new mongoose.Schema({
         type: String,
         require: true
     }
+}, {timestamps: true })
 
-})
 
-const Routes = mongoose.model('Route', routeSchema);
-
-module.exports = Route;
+module.exports = mongoose.model('Ride', activitySchema)
