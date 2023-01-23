@@ -19,13 +19,15 @@ app.use((req,res,next) => {
 app.use('/api/rides', rideRoutes)
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect('mongodb+srv://bikeskagit:bikesbikesbikes@cluster0.ntlbuci.mongodb.net/?retryWrites=true&w=majority')
     .then(()=>{
+
 // listen for requests
-app.listen(process.env.PORT, ()=>{
-    console.log('connected to db listening...on port 4000', process.env.PORT)
+app.listen(4000, ()=>{
+    console.log('connected to db listening...on port 4000')
 })
 })
+
     .catch((error) => {
         console.log(error)
     })
