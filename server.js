@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -19,12 +19,12 @@ app.use((req,res,next) => {
 app.use('/api/rides', rideRoutes)
 
 // Connect to DB
-mongoose.connect('mongodb+srv://bikeskagit:bikesbikesbikes@cluster0.ntlbuci.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
 
 // listen for requests
-app.listen(3000, ()=>{
-    console.log('connected to db listening...on port 4000')
+app.listen(process.env.PORT, ()=>{
+    console.log('connected to db listening...on port 4000', process.env.PORT)
 })
 })
 
