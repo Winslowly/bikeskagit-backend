@@ -23,7 +23,7 @@ mongoose.connect('mongodb+srv://bikeskagit:bikesbikesbikes@cluster0.ntlbuci.mong
     .then(()=>{
 
 // listen for requests
-app.listen(4000, ()=>{
+app.listen(3000, ()=>{
     console.log('connected to db listening...on port 4000')
 })
 })
